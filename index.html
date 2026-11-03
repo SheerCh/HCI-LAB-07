@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f7f7" />
+    <meta name="description" content="Join Campus Tech Week for practical talks, hands-on demos, and student-led innovation." />
+    <title>Campus Tech Week | PUCIT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #263838;
+        --muted: #617171;
+        --accent: #216f6c;
+        --accent-soft: #edf5f4;
+        --line: #cdd8d8;
+        --surface: #ffffff;
+        --wash: #f4f7f7;
+        --content: 1152px;
+        --gutter: clamp(20px, 8.34vw, 96px);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+      body {
+        margin: 0;
+        background: var(--surface);
+        color: var(--ink);
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+        line-height: 1.45;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; text-decoration: none; }
+      button, input { font: inherit; }
+      button, a, input { -webkit-tap-highlight-color: transparent; }
+      :focus-visible { outline: 3px solid #6bb5ae; outline-offset: 3px; }
+      .container { width: min(100%, var(--content)); margin-inline: auto; }
+      .inset { padding-inline: var(--gutter); }
+
+      .site-header { border-bottom: 1px solid var(--line); background: var(--surface); }
+      .header-inner {
+        display: flex;
+        min-height: 60px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-block: 14px;
+      }
+      .brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 8px; }
+      .brand img { width: 24px; height: 24px; }
+      .brand span { font-size: 18px; font-weight: 600; line-height: 24px; }
+      .primary-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 24px; }
+      .primary-nav a { font-size: 14px; font-weight: 500; transition: color 160ms ease; }
+      .primary-nav a:hover, .primary-nav a[aria-current="location"] { color: var(--accent); }
+
+      .hero, .agenda-section, .registration-section { background: var(--wash); }
+      .hero { padding-block: 40px; }
+      .hero-layout { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px 48px; }
+      .hero-copy { flex: 1 1 280px; max-width: 650px; }
+      .eyebrow { margin: 0 0 6px; color: var(--accent); font-size: 12px; line-height: 16px; }
+      h1 { margin: 0 0 8px; font-size: 26px; font-weight: 700; line-height: 34px; }
+      .hero-copy > p:not(.eyebrow) { max-width: 580px; margin: 0; color: var(--muted); }
+      .button {
+        display: inline-flex;
+        min-height: 40px;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 4px;
+        padding: 10px 20px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 160ms ease, transform 160ms ease;
+      }
+      .button:hover { background: #185b58; transform: translateY(-1px); }
+      .hero-copy .button { margin-top: 16px; }
+      .visit-card { flex: 0 1 300px; border: 1px solid var(--line); border-radius: 4px; padding: 20px 24px; background: var(--surface); }
+      .visit-card h2 { margin: 0 0 12px; font-size: 14px; font-weight: 500; line-height: 20px; }
+      .visit-detail { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+      .visit-detail img { width: 20px; height: 20px; }
+      .visit-note { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+
+      .section { padding-block: 32px; }
+      .section-heading { margin-bottom: 24px; }
+      .section-heading h2 { margin: 0 0 4px; font-size: 18px; font-weight: 600; line-height: 24px; }
+      .section-heading p { margin: 0; color: var(--muted); }
+      .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+      .feature-card { min-width: 0; border: 1px solid var(--line); border-radius: 4px; padding: 20px 24px; background: var(--surface); }
+      .feature-card img { display: block; width: 24px; height: 24px; margin-bottom: 12px; }
+      .feature-card h3 { margin: 0 0 4px; font-size: 14px; font-weight: 500; line-height: 20px; }
+      .feature-card p { margin: 0; color: var(--muted); }
+
+      .agenda-list { overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+      .agenda-row { display: grid; grid-template-columns: 104px minmax(200px, 220px) minmax(0, 1fr); align-items: center; gap: 8px 24px; min-height: 44px; padding: 10px 24px; }
+      .agenda-row + .agenda-row { border-top: 1px solid var(--line); }
+      .agenda-time { color: var(--accent); font-weight: 500; white-space: nowrap; }
+      .agenda-title { font-weight: 500; }
+      .agenda-description { color: var(--muted); }
+
+      .attendance-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .attendance-option {
+        position: relative;
+        display: flex;
+        min-width: 0;
+        align-items: flex-start;
+        gap: 16px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 20px 24px;
+        background: var(--surface);
+        cursor: pointer;
+        transition: border-color 160ms ease, background 160ms ease;
+      }
+      .attendance-option:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+      .attendance-option input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+      .attendance-option:focus-within { outline: 3px solid #6bb5ae; outline-offset: 3px; }
+      .attendance-option img { flex: 0 0 auto; width: 24px; height: 24px; }
+      .option-copy { flex: 1; min-width: 0; }
+      .option-copy strong { display: block; margin-bottom: 4px; font-weight: 500; }
+      .option-copy span { display: block; color: var(--muted); }
+      .radio-mark { flex: 0 0 auto; width: 16px !important; height: 16px !important; margin: 2px 0 0 !important; }
+
+      .registration-card { border: 1px solid var(--line); border-radius: 4px; padding: 24px; background: var(--surface); }
+      .form-intro { margin-bottom: 16px; }
+      .form-intro h3 { margin: 0; font-size: 18px; font-weight: 600; line-height: 24px; }
+      .form-intro p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+      .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .field { display: grid; gap: 6px; min-width: 0; }
+      .field label { font-weight: 500; }
+      .field input { width: 100%; min-height: 40px; border: 1px solid var(--line); border-radius: 4px; padding: 9px 12px; color: var(--ink); background: var(--surface); }
+      .field input::placeholder { color: var(--muted); opacity: 1; }
+      .field input:focus { border-color: var(--accent); outline: 2px solid #b5d8d5; outline-offset: 1px; }
+      .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 16px; }
+      .form-actions p { flex: 1; min-width: 200px; margin: 0; color: var(--muted); font-size: 12px; }
+      .form-status { margin: 12px 0 0; color: var(--accent); font-weight: 500; }
+
+      .faq-list { display: grid; }
+      .faq-item { padding: 0 0 16px; }
+      .faq-item + .faq-item { border-top: 1px solid var(--line); padding-top: 16px; }
+      .faq-item h3 { margin: 0 0 4px; font-size: 14px; font-weight: 500; line-height: 20px; }
+      .faq-item p { margin: 0; color: var(--muted); }
+      .site-footer { border-top: 1px solid var(--line); background: var(--wash); }
+      .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 20px; }
+      .footer-inner p { margin: 0; color: var(--muted); font-size: 12px; }
+      .footer-event { display: grid; gap: 2px; }
+      .footer-event strong { color: var(--ink); font-size: 14px; font-weight: 500; }
+
+      @media (max-width: 760px) {
+        :root { --gutter: 24px; }
+        .header-inner { align-items: flex-start; flex-direction: column; gap: 12px; }
+        .primary-nav { width: 100%; justify-content: flex-start; gap: 8px 20px; }
+        .hero { padding-block: 32px; }
+        .hero-layout { gap: 24px; }
+        .hero-copy { flex-basis: 100%; }
+        .visit-card { flex-basis: 100%; max-width: none; }
+        .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .agenda-row { grid-template-columns: 88px minmax(0, 1fr); gap: 4px 12px; padding: 12px 16px; }
+        .agenda-description { grid-column: 2; }
+      }
+      @media (max-width: 520px) {
+        :root { --gutter: 20px; }
+        .brand span { font-size: 17px; }
+        .primary-nav { gap: 8px 16px; }
+        .primary-nav a { font-size: 13px; }
+        .section { padding-block: 28px; }
+        .section-heading { margin-bottom: 18px; }
+        .feature-grid, .attendance-grid, .form-grid { grid-template-columns: 1fr; }
+        .feature-card, .attendance-option { padding: 18px; }
+        .agenda-row { grid-template-columns: 1fr; gap: 3px; padding: 12px 16px; }
+        .agenda-description { grid-column: auto; }
+        .registration-card { padding: 18px; }
+        .form-actions { align-items: flex-start; flex-direction: column; }
+        .form-actions p { min-width: 0; }
+        .footer-inner { align-items: flex-start; flex-direction: column; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container inset header-inner">
+        <a class="brand" href="#top" aria-label="Campus Tech Week home">
+          <img src="assets/code.svg" alt="" />
+          <span>Campus Tech Week</span>
+        </a>
+        <nav class="primary-nav" aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#agenda">Agenda</a>
+          <a href="#attendance">Attendance</a>
+          <a href="#register" aria-current="location">Register</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="about">
+        <div class="container inset hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">PUCIT · A DAY OF LEARNING AND SHARING</p>
+            <h1>Campus Tech Week</h1>
+            <p>Join us for practical talks, hands-on demos, and student-led innovation. Explore new ideas and learn alongside fellow students.</p>
+            <a class="button" href="#register">Register Now</a>
+          </div>
+          <aside class="visit-card" aria-label="Event details">
+            <h2>Plan your visit</h2>
+            <p class="visit-detail"><img src="assets/calendar.svg" alt="" /><span>Fri, 16 Oct · 10 AM</span></p>
+            <p class="visit-detail"><img src="assets/map-pin.svg" alt="" /><span>Innovation Hall</span></p>
+            <p class="visit-note">Attend on campus or join online.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="expect-title">
+        <div class="container inset">
+          <div class="section-heading">
+            <h2 id="expect-title">What to expect</h2>
+            <p>A chance to learn something useful, try it out, and see student ideas in action.</p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <img src="assets/presentation.svg" alt="" />
+              <h3>Practical talks</h3>
+              <p>Hear clear explanations of tech topics and see how they connect to your coursework.</p>
+            </article>
+            <article class="feature-card">
+              <img src="assets/laptop.svg" alt="" />
+              <h3>Hands-on demos</h3>
+              <p>Try useful tools, follow simple examples, and ask questions as you go.</p>
+            </article>
+            <article class="feature-card">
+              <img src="assets/folder-code.svg" alt="" />
+              <h3>Student projects</h3>
+              <p>Explore what students are building and share ideas with the people behind the work.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section agenda-section" id="agenda" aria-labelledby="agenda-title">
+        <div class="container inset">
+          <div class="section-heading">
+            <h2 id="agenda-title">Agenda</h2>
+            <p>A simple plan for the day, starting at 10 AM. Session timings are indicative.</p>
+          </div>
+          <div class="agenda-list" role="list" aria-label="Event agenda">
+            <div class="agenda-row" role="listitem"><span class="agenda-time">10:00 AM</span><span class="agenda-title">Welcome &amp; introduction</span><span class="agenda-description">Meet the group and get an overview of the day.</span></div>
+            <div class="agenda-row" role="listitem"><span class="agenda-time">10:15 AM</span><span class="agenda-title">Practical tech talks</span><span class="agenda-description">Explore ideas, tools, and real examples.</span></div>
+            <div class="agenda-row" role="listitem"><span class="agenda-time">11:00 AM</span><span class="agenda-title">Hands-on demo session</span><span class="agenda-description">Follow along and try something new.</span></div>
+            <div class="agenda-row" role="listitem"><span class="agenda-time">12:00 PM</span><span class="agenda-title">Student projects &amp; Q&amp;A</span><span class="agenda-description">See student work and exchange questions.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="attendance" aria-labelledby="attendance-title">
+        <div class="container inset">
+          <div class="section-heading">
+            <h2 id="attendance-title">How will you attend?</h2>
+            <p>Choose your attendance option before completing the registration form.</p>
+          </div>
+          <div class="attendance-grid" role="radiogroup" aria-labelledby="attendance-title">
+            <label class="attendance-option">
+              <input type="radio" name="attendance" value="On-Campus" checked />
+              <img src="assets/school.svg" alt="" />
+              <span class="option-copy"><strong>On-Campus</strong><span>Join us at Innovation Hall for the talks, demos, and student projects.</span></span>
+              <img class="radio-mark" src="assets/radio-selected.svg" data-selected="assets/radio-selected.svg" data-unselected="assets/radio-unselected.svg" alt="" />
+            </label>
+            <label class="attendance-option">
+              <input type="radio" name="attendance" value="Online" />
+              <img src="assets/monitor.svg" alt="" />
+              <span class="option-copy"><strong>Online</strong><span>Join remotely. Online joining details will be shared by email.</span></span>
+              <img class="radio-mark" src="assets/radio-unselected.svg" data-selected="assets/radio-selected.svg" data-unselected="assets/radio-unselected.svg" alt="" />
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="section registration-section" id="register" aria-labelledby="register-title">
+        <div class="container inset">
+          <div class="section-heading">
+            <h2 id="register-title">Register for Tech Event</h2>
+            <p>Reserve your place for Campus Tech Week. Early Bird Registration Available.</p>
+          </div>
+          <form class="registration-card" id="registration-form">
+            <div class="form-intro">
+              <h3>Your details</h3>
+              <p id="attendance-summary">All fields are required. Attendance selected: On-Campus.</p>
+            </div>
+            <div class="form-grid">
+              <div class="field"><label for="full-name">Full Name</label><input id="full-name" name="name" type="text" placeholder="Enter your full name" autocomplete="name" required /></div>
+              <div class="field"><label for="email">Email Address</label><input id="email" name="email" type="email" placeholder="you@university.edu" autocomplete="email" required /></div>
+              <div class="field"><label for="department">Department</label><input id="department" name="department" type="text" placeholder="Enter your department" required /></div>
+              <div class="field"><label for="semester">Semester</label><input id="semester" name="semester" type="text" placeholder="Enter your semester" required /></div>
+            </div>
+            <div class="form-actions">
+              <button class="button" type="submit">Register Now</button>
+              <p>Your details are used only for this event.</p>
+            </div>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="container inset">
+          <div class="section-heading">
+            <h2 id="faq-title">Frequently asked questions</h2>
+            <p>A few things to know before you join.</p>
+          </div>
+          <div class="faq-list">
+            <article class="faq-item"><h3>Do I need any prior experience?</h3><p>No. The talks and demos are designed to be approachable. Bring your curiosity and questions.</p></article>
+            <article class="faq-item"><h3>What should I bring for the demos?</h3><p>Bring a laptop if you would like to follow along, plus a notebook for any ideas you want to keep.</p></article>
+            <article class="faq-item"><h3>How do I join online?</h3><p>Choose Online under attendance and register with your email address to receive the joining details.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container inset footer-inner">
+        <div class="footer-event"><strong>Campus Tech Week</strong><p>Fri, 16 Oct · 10 AM · Innovation Hall</p></div>
+        <p>PUCIT · Human-Computer Interaction lab</p>
+      </div>
+    </footer>
+
+    <script>
+      const attendanceInputs = document.querySelectorAll('input[name="attendance"]');
+      const attendanceSummary = document.querySelector('#attendance-summary');
+      const registrationForm = document.querySelector('#registration-form');
+      const formStatus = document.querySelector('#form-status');
+
+      attendanceInputs.forEach((input) => {
+        input.addEventListener('change', () => {
+          attendanceSummary.textContent = `All fields are required. Attendance selected: ${input.value}.`;
+          attendanceInputs.forEach((option) => {
+            const radioMark = option.closest('.attendance-option').querySelector('.radio-mark');
+            radioMark.src = option.checked ? radioMark.dataset.selected : radioMark.dataset.unselected;
+          });
+        });
+      });
+
+      registrationForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = new FormData(registrationForm).get('name').trim();
+        formStatus.textContent = `Thanks, ${name}. This demo form does not send or store your registration.`;
+      });
+    </script>
+  </body>
+</html>
